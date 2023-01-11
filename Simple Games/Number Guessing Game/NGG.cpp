@@ -1,11 +1,6 @@
-//Number Guessing Game
-
 #include<iostream>
 #include<cstdlib>
 #include<ctime>
-#include<string>
-
-using namespace std;
 
 class NumberGuessingGame{
     private:
@@ -17,12 +12,12 @@ class NumberGuessingGame{
         }
         void gameIntro(){
             system("cls");
-            cout << "\n--->>[Number Guessing Game]<<---\n\n[Game Rules]\n";
-            cout << " >> Player will input the number of column presented on table he/she wants to guess.";
-            cout << "\nThe same thing goes to the player guess input number(1-10).";
-            cout << "\nFor every successful guess, the number of attempts and score will increase.";
-            cout << "\nThe game will end if the player successfully guess three numbers or used all of the attempts.";
-            cout << "\n >> Note: The correct guess numbers will be save at [Correct Guesses Table].\n";
+            std::cout << "\n--->>[Number Guessing Game]<<---\n\n[Game Rules]\n";
+            std::cout << " >> Player will input the number of column presented on table he/she wants to guess.";
+            std::cout << "\nThe same thing goes to the player guess input number(1-10).";
+            std::cout << "\nFor every successful guess, the number of attempts and score will increase.";
+            std::cout << "\nThe game will end if the player successfully guess three numbers or used all of the attempts.";
+            std::cout << "\n >> Note: The correct guess numbers will be save at [Correct Guesses Table].\n";
         }
         void numGen(){
             srand(time(0));
@@ -32,22 +27,22 @@ class NumberGuessingGame{
             }
         } 
         void displayTable(){
-            cout << "\nTable : ";
+            std::cout << "\nTable : ";
             for(int x=0;x<10;x++){
                 tDisplay[x] = x+1;
-                cout << tDisplay[x] << " ";
+                std::cout << tDisplay[x] << " ";
             }
-            cout << endl;
+            std::cout << std::endl;
         } // testing purposes only
         void displayNum(){
-            cout << "\nRandom Numbers: ";
+            std::cout << "\nRandom Numbers: ";
             for(int x=0;x<10;x++){
-                cout << randNum[x] << " ";
+                std::cout << randNum[x] << " ";
             }
         }
         void guessPicker(int x, int y){
             system("cls");
-            cout << "\n--->>[Number Guessing Game]<<---\n";
+            std::cout << "\n--->>[Number Guessing Game]<<---\n";
             pArray[x-1] = y;
             if(pArray[x-1] == randNum[x-1]){
                 if(pArray[x-1] != pDisplay[x-1]){
@@ -55,23 +50,23 @@ class NumberGuessingGame{
                     pScore++;
                     pDisplay[x-1] = pArray[x-1];
                     cDisplay[x-1] = pArray[x-1];
-                    cout << "\nYou have guess the number correctly!\n\n >> Player Score: " << pScore << " Attempts : " << attempts;
+                    std::cout << "\nYou have guess the number correctly!\n\n >> Player Score: " << pScore << " Attempts : " << attempts;
                 }
-                else cout << "\nNumber already Guess!\n";
+                else std::cout << "\nNumber already Guess!\n";
             }
             else{
                 attempts--;
-                cout << "\nIncorrect Guess! Try again!\n\n >> Player Score: " << pScore << " Attempts : " << attempts;
-                if(y < randNum[x-1]) cout << "\nHint: You are close to the random number!\n";
-                else cout << "\nHint: You are far from the random number!\n";    
+                std::cout << "\nIncorrect Guess! Try again!\n\n >> Player Score: " << pScore << " Attempts : " << attempts;
+                if(y < randNum[x-1]) std::cout << "\nHint: You are close to the random number!\n";
+                else std::cout << "\nHint: You are far from the random number!\n";    
             }
         }
         void displayGuess(){
-            cout << "\nCorrect Guess Table: ";
+            std::cout << "\nCorrect Guess Table: ";
             for(int x=0;x<10;x++){
-                cout << cDisplay[x] << " ";
+                std::cout << cDisplay[x] << " ";
             }
-            cout << endl;
+            std::cout << std::endl;
         }
         bool gameEnder(){
             if(attempts == 0 || pScore == 3) return true;
@@ -81,22 +76,27 @@ class NumberGuessingGame{
 int main(){
     bool gameEnds;    
     int pPicks, cNumber;
+
     NumberGuessingGame NGG;
 
     NGG.gameIntro();
     NGG.numGen();
+    
     do{
+
         if(gameEnds == true )break;
         NGG.displayTable();
         NGG.displayNum();
 
-        cout << "\nPut the number of column: "; cin >> cNumber;
-        cout << "\nPut the number you guess: "; cin >> pPicks;
+        std::cout << "\nPut the number of column: "; std::cin >> cNumber;
+        std::cout << "\nPut the number you guess: "; std::cin >> pPicks;
 
         NGG.guessPicker(cNumber, pPicks);
         NGG.displayGuess();
 
         gameEnds = NGG.gameEnder();
+
     }while(gameEnds!= true);
+
     return 0;
 }

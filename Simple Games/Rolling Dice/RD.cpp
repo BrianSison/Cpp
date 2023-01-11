@@ -1,9 +1,6 @@
-//Rolling Dice
 #include<iostream>
 #include<cstdlib>
 #include<ctime>
-
-using namespace std;
 
 class RollingDice{
     private:
@@ -12,8 +9,8 @@ class RollingDice{
     public:
         void display(){
             system("cls");
-            cout << ">>> [Roll the DICE] <<< \n";
-            cout << "A game where the participant with most number of even numbers wins!\n";
+            std::cout << ">>> [Roll the DICE] <<< \n";
+            std::cout << "A game where the participant with most number of even numbers wins!\n";
         }
         void Rolls(){
             srand(time(0));
@@ -38,13 +35,13 @@ class RollingDice{
         }
         void displayRolls(){
             system("cls");
-            cout << "\nComputer Rolls: ";
+            std::cout << "\nComputer Rolls: ";
             for(int x=0;x<6;x++){
-                cout << cRolls[x] << " ";
+                std::cout << cRolls[x] << " ";
             }
-            cout << "\nPlayer Rolls: ";
+            std::cout << "\nPlayer Rolls: ";
             for(int x=0;x<6;x++){
-                cout << pRolls[x] << " ";
+                std::cout << pRolls[x] << " ";
             }
         }
         int winner(){
@@ -65,34 +62,38 @@ class RollingDice{
             else if(z == 2) gameWinner = "Player Wins!\n";
             else gameWinner = "No Winner!\n";
 
-            cout << "\n\nMatch Result: " << gameWinner;
-            cout << "Computer even numbers: " << cNum << " Player even numbers: " << pNum;
-            cout << "\nComputer Score: " << x << " Player Score: " << y;
+            std::cout << "\n\nMatch Result: " << gameWinner;
+            std::cout << "Computer even numbers: " << cNum << " Player even numbers: " << pNum;
+            std::cout << "\nComputer Score: " << x << " Player Score: " << y;
             
             cNum = 0, pNum = 0;
         }
 };
 
 int main(){
-    RollingDice RD;
     int cScore, pScore, win;
     char play;
 
+    RollingDice RD;
     RD.display();
+
     do{
         if(cScore == 3 || pScore == 3) break;
         
-        cout << "\nWould you like to continue? : Y/N : "; cin >> play;
+        std::cout << "\nWould you like to continue? : Y/N : "; std::cin >> play;
         if(play!='Y') break;
         else{
             RD.Rolls();
             RD.checker();
             RD.displayRolls();
+
             win = RD.winner();
             pScore = RD.playerScore(win);
             cScore = RD.computerScore(win);
+
             RD.displayOutcome(cScore, pScore, win);
         }
+
     }while(cScore!=3 || pScore!=3);
 
     return 0;
